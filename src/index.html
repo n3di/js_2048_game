@@ -13,58 +13,83 @@
     />
   </head>
   <body>
-    <div class="container">
-      <div class="game-header">
-        <h1>2048</h1>
-        <div class="controls">
-          <p class="info">
-            Score:
-            <span class="game-score">0</span>
-          </p>
-          <button class="button start">Start</button>
-        </div>
+    <header class="header">
+      <h1>2048</h1>
+      <div class="game-stats">
+        <span class="stats_title">Score</span>
+        <span class="stats_score">0</span>
       </div>
+      <button class="button restart">New Game</button>
+    </header>
+    <main class="main">
+      <!-- Statyczna siatka planszy -->
+      <div class="grid-container">
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
 
-      <table class="game-field">
-        <tbody>
-          <tr class="field-row">
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-          </tr>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
 
-          <tr class="field-row">
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-          </tr>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
 
-          <tr class="field-row">
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-          </tr>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
+        <div class="grid-cell"></div>
 
-          <tr class="field-row">
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-            <td class="field-cell"></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="message-container">
-        <p class="message message-lose hidden">You lose! Restart the game?</p>
-        <p class="message message-win hidden">Winner! Congrats! You did it!</p>
-        <p class="message message-start">
-          Press "Start" to begin game. Good luck!
-        </p>
+        <!-- Dynamiczna warstwa kafelków -->
+        <div class="tile-container"></div>
       </div>
-    </div>
-    <script src="scripts/main.js"></script>
+      <div class="links">
+        <button class="button toggle-theme">
+          <img
+            src="./images/icons/sun.svg"
+            alt="Toggle Theme"
+            class="icon-sun"
+          />
+          <img
+            src="./images/icons/moon.svg"
+            alt="Toggle Theme"
+            class="icon-moon hidden"
+          />
+        </button>
+        <a
+          href="https://www.github.com/n3di/js_2048_game"
+          target="_blank"
+        >
+          <img
+            src="./images/icons/github.svg"
+            alt="Github Icon"
+          />
+        </a>
+      </div>
+    </main>
+    <footer class="footer">
+      <span class="copyright">
+        &copy;2024&nbsp;
+        <a
+          href="https://www.nedi.me"
+          target="_blank"
+        >
+          Michał Szwindowski
+        </a>
+        . All rights reserved.
+      </span>
+    </footer>
+    <script
+      src="scripts/game.js"
+      type="module"
+    ></script>
+    <script
+      src="scripts/toggle-theme.js"
+      type="module"
+    ></script>
   </body>
 </html>

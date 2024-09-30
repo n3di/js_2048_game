@@ -1,0 +1,19 @@
+.footer {
+  height: $footer-height;
+  display: flex;
+  user-select: none;
+  align-items: center;
+
+  .copyright {
+    font-size: 12px;
+    padding: 0 12px 6px;
+    text-align: center;
+    display: flex;
+    color: $text-color-footer;
+
+    a {
+      color: $text-color-footer;
+      text-decoration: none;
+    }
+  }
+}

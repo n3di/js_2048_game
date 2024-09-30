@@ -1,0 +1,17 @@
+@mixin calculate-board-size {
+  max-width: calc(
+    100vh - #{$header-height} - #{$footer-height} - #{$margin-board * 2} - #{$buttons-height} -
+      #{$margin-board}
+  );
+  max-height: calc(
+    100vh - #{$header-height} - #{$footer-height} - #{$margin-board * 2} - #{$buttons-height} -
+      #{$margin-board}
+  );
+}
+
+// Funkcja do generowania zmiennych CSS na podstawie motywu
+@mixin theme($theme) {
+  @each $key, $value in map-get($themes, $theme) {
+    #{$key}: #{$value};
+  }
+}

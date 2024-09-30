@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $font-family-base;
+  font-size: 24px;
+  font-weight: 400;
+  background-color: var(--body);
+  color: var(--text);
+}
+
+.hidden {
+  display: none;
+}
+
+// Definiowanie stylów dla motywów
+.light-theme {
+  @include theme(light);
+}
+
+.dark-theme {
+  @include theme(dark);
+}

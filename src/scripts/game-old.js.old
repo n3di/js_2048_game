@@ -1,0 +1,208 @@
+import Game from '../modules/Game.class.js';
+
+const game = new Game();
+
+// Pobieramy elementy DOM
+const startButton = document.querySelector('.start');
+const scoreElement = document.querySelector('.stats_score');
+const tileContainer = document.querySelector('.tile-container');
+const messageContainer = document.querySelector('.message-container');
+const gridContainer = document.querySelector('.grid-container'); // Kontener siatki
+const gridCells = document.querySelectorAll('.grid-cell'); // Komórki siatki
+
+// Funkcja do pobierania rozmiarów komórek siatki i paddingu kontenera
+function getGridCellSize() {
+  const gridCell = gridCells[0]; // Zakładamy, że wszystkie komórki mają ten sam rozmiar
+  const { width, height } = gridCell.getBoundingClientRect();
+
+  // Pobieramy padding kontenera siatki
+  const gridContainerStyles = window.getComputedStyle(gridContainer);
+  const padding = parseFloat(gridContainerStyles.paddingLeft); // Pobieramy padding jako liczbę (możemy założyć, że lewy i prawy są takie same)
+
+  return { width, height, padding };
+}
+
+// Funkcja do generowania kafelków
+function createTiles() {
+  tileContainer.innerHTML = ''; // Czyścimy kontener kafelków przed generowaniem nowych
+
+  const state = game.getState(); // Pobieramy stan gry (tablica 4x4)
+  const { width: cellWidth, height: cellHeight, padding } = getGridCellSize(); // Pobieramy rozmiar komórek siatki i padding
+
+  for (let row = 0; row < 4; row++) {
+    for (let col = 0; col < 4; col++) {
+      const value = state[row][col];
+
+      if (value !== 0) {
+        const tile = document.createElement('div');
+
+        tile.classList.add('tile', `tile--${value}`);
+        tile.textContent = value;
+
+        // Ustawiamy rozmiar kafelka dynamicznie na podstawie szerokości komórek siatki
+        tile.style.width = `${cellWidth}px`;
+        tile.style.height = `${cellHeight}px`;
+
+        // Obliczamy pozycję kafelka (przesunięcie w poziomie i pionie, z uwzględnieniem paddingu)
+        const xPos = padding + col * (cellWidth + 10); // Uwzględniamy padding i grid-gap (10px odstępu)
+        const yPos = padding + row * (cellHeight + 10);
+
+        tile.style.transform = `translate(${xPos}px, ${yPos}px)`;
+
+        // Dodajemy kafelek do kontenera
+        tileContainer.appendChild(tile);
+      }
+    }
+  }
+}
+
+// Funkcja do aktualizacji rozmiarów kafelków podczas zmiany rozmiaru okna
+function updateTileSizes() {
+  const { width: cellWidth, height: cellHeight, padding } = getGridCellSize(); // Pobieramy nowy rozmiar komórek i padding
+
+  const tiles = document.querySelectorAll('.tile');
+
+  tiles.forEach((tile, index) => {
+    // Obliczamy wiersz i kolumnę na podstawie indeksu kafelka
+    const row = Math.floor(index / 4);
+    const col = index % 4;
+
+    // Aktualizujemy szerokość i wysokość kafelka
+    tile.style.width = `${cellWidth}px`;
+    tile.style.height = `${cellHeight}px`;
+
+    // Aktualizujemy pozycję kafelka z uwzględnieniem paddingu
+    const xPos = padding + col * (cellWidth + 10);
+    const yPos = padding + row * (cellHeight + 10);
+
+    tile.style.transform = `translate(${xPos}px, ${yPos}px)`;
+  });
+}
+
+// Inicjalizujemy grę
+updateUI();
+
+// Nasłuchiwanie przycisku Start/Restart
+startButton.addEventListener('click', () => {
+  // Wyświetlamy prompt
+  const userConfirmed = confirm(
+    'Are you sure you want to start a new game? All progress will be lost.',
+  );
+
+  // Jeżeli użytkownik potwierdzi, restartujemy grę
+  if (userConfirmed) {
+    game.restart();
+    updateUI();
+
+    startButton.textContent = 'Restart';
+    startButton.classList.remove('start');
+    startButton.classList.add('restart');
+    messageContainer.classList.add('hidden'); // Ukrywamy wiadomości na początku gry
+  }
+});
+
+// Nasłuchiwanie klawiatury
+document.addEventListener('keydown', (e) => {
+  if (game.getStatus() !== 'playing') {
+    return;
+  }
+
+  switch (e.key) {
+    case 'ArrowLeft':
+      game.moveLeft();
+      updateUI();
+      break;
+    case 'ArrowRight':
+      game.moveRight();
+      updateUI();
+      break;
+    case 'ArrowUp':
+      game.moveUp();
+      updateUI();
+      break;
+    case 'ArrowDown':
+      game.moveDown();
+      updateUI();
+      break;
+    default:
+      break;
+  }
+});
+
+// Funkcja aktualizująca interfejs użytkownika
+function updateUI() {
+  createTiles(); // Tworzymy kafelki dynamicznie
+
+  // Aktualizujemy wynik
+  scoreElement.textContent = game.getScore();
+
+  // Aktualizujemy komunikaty
+  const gameStatus = game.getStatus();
+
+  if (gameStatus === 'win') {
+    messageContainer.textContent = 'Congratulations, You Won!';
+    messageContainer.classList.remove('hidden');
+  } else if (gameStatus === 'lose') {
+    messageContainer.textContent = 'Game Over! Try Again?';
+  }
+}
+
+// Nasłuchiwanie zmiany rozmiaru okna
+window.addEventListener('resize', () => {
+  updateTileSizes(); // Aktualizujemy rozmiary kafelków przy zmianie rozmiaru okna
+});
+
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+// Funkcja do obsługi gestów przesunięcia
+function handleTouchStart(event) {
+  // Zapisujemy pozycję początkową dotyku
+  touchStartX = event.changedTouches[0].screenX;
+  touchStartY = event.changedTouches[0].screenY;
+}
+
+function handleTouchEnd(event) {
+  // Zapisujemy pozycję końcową dotyku
+  touchEndX = event.changedTouches[0].screenX;
+  touchEndY = event.changedTouches[0].screenY;
+
+  // Wywołujemy funkcję sprawdzającą kierunek przesunięcia
+  handleSwipe();
+}
+
+// Funkcja sprawdzająca kierunek przesunięcia
+function handleSwipe() {
+  const diffX = touchEndX - touchStartX;
+  const diffY = touchEndY - touchStartY;
+
+  // Sprawdzamy, czy przesunięcie było bardziej w poziomie, czy w pionie
+  if (Math.abs(diffX) > Math.abs(diffY)) {
+    // Przesunięcie w poziomie
+    if (diffX > 0) {
+      // Swipe w prawo
+      game.moveRight();
+    } else {
+      // Swipe w lewo
+      game.moveLeft();
+    }
+  } else {
+    // Przesunięcie w pionie
+    if (diffY > 0) {
+      // Swipe w dół
+      game.moveDown();
+    } else {
+      // Swipe w górę
+      game.moveUp();
+    }
+  }
+
+  // Aktualizacja interfejsu użytkownika po przesunięciu
+  updateUI();
+}
+
+// Dodajemy nasłuchiwanie na zdarzenia dotykowe do planszy gry
+gridContainer.addEventListener('touchstart', handleTouchStart, false);
+gridContainer.addEventListener('touchend', handleTouchEnd, false);

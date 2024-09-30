@@ -1,0 +1,79 @@
+// Import Google Fonts
+@import 'https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap';
+
+// Typography variables
+$font-family-base: 'Rubik', Arial, system-ui, sans-serif;
+
+// Color variables – General element colors
+$color-body: rgb(250, 248, 239); // Body background
+$color-board: rgb(187, 173, 160); // Game board background
+$color-cell-empty: rgb(205, 192, 180); // Empty cell color
+$color-score-background: rgb(234, 231, 217); // Score section background
+
+// Color variables
+$themes: (
+  light: (
+    --body: rgb(250, 248, 239),
+    --board: rgb(187, 173, 160),
+    --cell-empty: rgb(205, 192, 180),
+    --score-background: rgb(234, 231, 217),
+    --text: rgb(119, 110, 101),
+    --tile-2: rgb(238, 228, 218),
+    --tile-4: rgb(237, 224, 200),
+    --tile-8: rgb(242, 177, 121),
+    --tile-16: rgb(245, 149, 99),
+    --tile-32: rgb(246, 124, 95),
+    --tile-64: rgb(246, 94, 59),
+    --tile-128: rgb(237, 207, 114),
+    --tile-256: rgb(237, 204, 97),
+    --tile-512: rgb(237, 200, 80),
+    --tile-1024: rgb(237, 197, 63),
+    --tile-2048: rgb(237, 194, 46),
+  ),
+  dark: (
+    --body: rgb(48, 48, 48),
+    --board: rgb(70, 70, 70),
+    --cell-empty: rgb(100, 100, 100),
+    --score-background: rgb(60, 60, 60),
+    --text: rgb(249, 246, 242),
+    --tile-2: rgb(100, 90, 85),
+    --tile-4: rgb(120, 110, 95),
+    --tile-8: rgb(160, 120, 80),
+    --tile-16: rgb(180, 100, 60),
+    --tile-32: rgb(200, 80, 50),
+    --tile-64: rgb(220, 60, 40),
+    --tile-128: rgb(230, 180, 60),
+    --tile-256: rgb(240, 200, 80),
+    --tile-512: rgb(250, 210, 100),
+    --tile-1024: rgb(255, 220, 120),
+    --tile-2048: rgb(255, 230, 140),
+  ),
+);
+
+// Text color variables
+$text-color-footer: rgb(117, 100, 82); // Footer text color
+$text-color-dark: rgb(
+  119,
+  110,
+  101
+); // Text color for cells 2 and 4 (dark text)
+$text-color-light: rgb(
+  249,
+  246,
+  242
+); // Text color for cells 8 and above (light text)
+
+// Font size variables
+$font-size-base: 16px;
+$font-size-large: 24px;
+$font-size-small: 12px;
+
+// Padding variables
+$padding-base: 10px;
+$padding-large: 20px;
+
+// Height variables for header and footer
+$header-height: 90px;
+$footer-height: 35px;
+$buttons-height: 75px;
+$margin-board: 35px;

@@ -1,0 +1,23 @@
+button {
+  align-items: center;
+  background-image: linear-gradient(rgb(153, 140, 126), rgb(152, 135, 118));
+  border-radius: 10px;
+  border: 0;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  font-size: 16px;
+  height: 40px;
+  justify-content: center;
+  text-wrap: nowrap;
+  user-select: none;
+  width: 111.15px;
+  transition: transform 0.1ms ease-in-out;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+a:active {
+  transform: scale(0.9);
+}

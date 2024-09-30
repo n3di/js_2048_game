@@ -1,0 +1,11 @@
+// _typography.scss
+
+h1 {
+  margin: 0 !important;
+  color: rgb(117, 100, 82);
+  font-family: $font-family-base;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 48px;
+  user-select: none;
+}

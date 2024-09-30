@@ -1,0 +1,33 @@
+.header {
+  height: $header-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px;
+  gap: 20;
+
+  .game-stats {
+    align-items: center;
+    background-color: $color-score-background;
+    border-radius: 14px;
+    color: rgb(152, 136, 118);
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    font-weight: 700;
+    height: 52px;
+    justify-content: center;
+    min-width: 87px;
+    width: 87px;
+    user-select: none;
+
+    .stats {
+      &_title {
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

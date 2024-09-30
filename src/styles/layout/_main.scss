@@ -1,0 +1,133 @@
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Aby wycentrować planszę pionowo */
+  flex: 1 1 0%; /* Aby wypełniała całe pozostałe miejsce */
+}
+
+.grid {
+  &-container {
+    margin: 35px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-gap: 10px;
+    background-color: var(--board);
+    padding: 10px;
+    border-radius: 20px;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: 100%; /* Plansza wypełnia 100% dostępnej szerokości */
+    height: auto; /* Wysokość obliczana na podstawie szerokości (kwadrat) */
+
+    @include calculate-board-size;
+  }
+
+  &-cell {
+    background-color: var(--cell-empty);
+    display: flex;
+    border-radius: 15px;
+  }
+}
+
+.tile {
+  font-size: 48px;
+  color: $text-color-dark;
+  position: absolute;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+
+  &-container {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+  }
+
+  &--2 {
+    background-color: var(--tile-2);
+  }
+  &--4 {
+    background-color: var(--tile-4);
+  }
+  &--8 {
+    background-color: var(--tile-8);
+    color: #f9f6f2;
+  }
+  &--16 {
+    background-color: var(--tile-16);
+    color: #f9f6f2;
+  }
+  &--32 {
+    background-color: var(--tile-32);
+    color: #f9f6f2;
+  }
+  &--64 {
+    background-color: var(--tile-64);
+    color: #f9f6f2;
+  }
+  &--128 {
+    background-color: var(--tile-128);
+    color: #f9f6f2;
+    font-size: 40px;
+  }
+  &--256 {
+    background-color: var(--tile-256);
+    color: #f9f6f2;
+    font-size: 40px;
+  }
+  &--512 {
+    background-color: var(--tile-512);
+    color: #f9f6f2;
+    font-size: 40px;
+  }
+  &--1024 {
+    background-color: var(--tile-1024);
+    color: #f9f6f2;
+    font-size: 32px;
+  }
+  &--2048 {
+    background-color: var(--tile-2048);
+    color: #f9f6f2;
+    font-size: 32px;
+  }
+}
+
+.links {
+  margin-bottom: $margin-board;
+  height: $buttons-height;
+  align-items: center;
+  background-color: $color-score-background;
+  padding: 12px;
+  border-radius: 14px;
+  color: var(--text);
+  display: flex;
+  gap: 12;
+  font-size: 20px;
+  font-weight: 700;
+  justify-content: center;
+
+  button,
+  a {
+    background-color: color.adjust($color-score-background, $lightness: -10%);
+    background-image: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    height: auto;
+    width: auto;
+  }
+
+  a {
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
