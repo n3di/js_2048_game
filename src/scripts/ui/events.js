@@ -1,4 +1,3 @@
-// events.js
 import { DOM } from './dom.js';
 import { restartGame } from '../core/gameManager.js';
 import { handleKeydown, handleTouchStart, handleTouchEnd } from './controls.js';

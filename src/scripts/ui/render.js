@@ -1,4 +1,3 @@
-// render.js
 import { DOM } from './dom.js';
 
 let lastBoard = [];

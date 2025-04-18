@@ -1,4 +1,3 @@
-// controls.js
 import { game, restartGame } from '../core/gameManager.js';
 import { renderBoard } from './render.js';
 

@@ -1,4 +1,3 @@
-// gameManager.js
 import Game from '../../modules/Game.class.js';
 import { renderBoard, hideMessage } from '../ui/render.js';
 

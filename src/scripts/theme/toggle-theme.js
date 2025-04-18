@@ -4,7 +4,6 @@ function setTheme(theme) {
   DOM.htmlElement.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
 
-  // Pokaż odpowiednią ikonę
   if (theme === 'dark') {
     DOM.iconSun.style.display = 'flex';
     DOM.iconMoon.style.display = 'none';

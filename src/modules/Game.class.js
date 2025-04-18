@@ -1,4 +1,3 @@
-// Game.class.js
 'use strict';
 
 class Game {
