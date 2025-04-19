@@ -17,7 +17,9 @@ export function handleKeydown(e) {
 
   const action = actions[e.key];
 
-  if (!action) return;
+  if (!action) {
+    return;
+  }
 
   if (action === 'restart') {
     restartGame();
@@ -25,7 +27,9 @@ export function handleKeydown(e) {
     return;
   }
 
-  if (game.getStatus() !== 'playing') return;
+  if (game.getStatus() !== 'playing') {
+    return;
+  }
 
   game[action]();
   renderBoard(game);
@@ -50,15 +54,25 @@ export function handleTouchEnd(e) {
   const absX = Math.abs(deltaX);
   const absY = Math.abs(deltaY);
 
-  if (Math.max(absX, absY) < SWIPE_THRESHOLD || game.getStatus() !== 'playing')
+  if (
+    Math.max(absX, absY) < SWIPE_THRESHOLD ||
+    game.getStatus() !== 'playing'
+  ) {
     return;
+  }
 
   if (absX > absY) {
-    if (deltaX > 0) game.moveRight();
-    else game.moveLeft();
+    if (deltaX > 0) {
+      game.moveRight();
+    } else {
+      game.moveLeft();
+    }
   } else {
-    if (deltaY > 0) game.moveDown();
-    else game.moveUp();
+    if (deltaY > 0) {
+      game.moveDown();
+    } else {
+      game.moveUp();
+    }
   }
 
   renderBoard(game);

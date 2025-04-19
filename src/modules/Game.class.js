@@ -50,9 +50,12 @@ class Game {
   }
 
   moveUp() {
-    this.performMove((board) =>
-      this.transpose(this.merge(this.transpose(board))),
-    );
+    this.performMove((board) => {
+      const transposed = this.transpose(board);
+      const merged = this.merge(transposed);
+
+      return this.transpose(merged);
+    });
   }
 
   moveDown() {
